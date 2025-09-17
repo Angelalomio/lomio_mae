@@ -13,35 +13,12 @@ class StudentsController extends Controller {
     }
 
     public function index()
-{
-    $this->call->model('StudentsModel');
+    {
+        $this->call->model('StudentsModel');
+        $data['users'] = $this->StudentsModel-> All();
 
-    // kunin ang search query kung meron
-    $search = $this->io->get('search');
-
-    // kunin ang page number (default = 1)
-    $page = (int) ($this->io->get('page') ?? 1);
-    $limit = 5; // ilang records per page
-    $offset = ($page - 1) * $limit;
-
-    if (!empty($search)) {
-        // search sa last_name, first_name, or email
-        $data['users'] = $this->StudentsModel->search($search, $limit, $offset);
-        $totalRecords = $this->StudentsModel->countSearch($search);
-    } else {
-        // normal listing
-        $data['users'] = $this->StudentsModel->getAllPaginated($limit, $offset);
-        $totalRecords = $this->StudentsModel->countAll();
+        $this->call->view('users/index', $data);
     }
-
-    // compute total pages
-    $data['total_pages'] = ceil($totalRecords / $limit);
-    $data['current_page'] = $page;
-    $data['search'] = $search;
-
-    $this->call->view('users/index', $data);
-}
-
 
     function create(){
         if($this->io->method() == 'post'){
