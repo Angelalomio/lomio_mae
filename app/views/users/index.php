@@ -35,20 +35,61 @@
 
   <!-- Main Content -->
   <div class="relative z-10 max-w-6xl mx-auto mt-16 px-4">
-    <div class="bg-[#fdfaf5] border-4 border-[#4a3728] rounded-2xl shadow-2xl relative overflow-hidden">
+    <div class="bg-[#fdfaf5] border-4 border-[#4a3728] rounded-2xl shadow-2xl relative overflow-hidden animate-fadeIn">
       <!-- Inner Frame -->
       <div class="absolute inset-2 border-2 border-[#8b6b4f] rounded-xl pointer-events-none"></div>
 
       <div class="p-10 relative z-10">
         <!-- Header -->
-        <div class="flex justify-between items-center mb-10">
-          <h1 class="text-3xl font-bold text-[#4a3728] font-['Special_Elite'] tracking-wide flex items-center gap-3">
+        <div class="mb-8 text-center">
+          <h1 class="text-3xl font-bold text-[#4a3728] font-['Special_Elite'] tracking-wide flex items-center justify-center gap-3">
             <svg class="w-8 h-8 text-[#8b6b4f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
             </svg>
-            Users
+            Users List
           </h1>
+        </div>
+
+        <!-- Search Form -->
+        <div class="flex justify-center mb-10">
+          <form action="<?= site_url('/'); ?>" method="get" 
+                class="flex items-center w-full max-w-md bg-[#fdfaf5] border-2 border-[#8b6b4f] rounded-full shadow-md overflow-hidden">
+            
+            <?php
+            $q = '';
+            if(isset($_GET['q'])) {
+                $q = $_GET['q'];
+            }
+            ?>
+
+            <!-- Input + Icon -->
+            <div class="flex items-center w-full px-3">
+              <svg xmlns="http://www.w3.org/2000/svg" 
+                  fill="none" viewBox="0 0 24 24" 
+                  stroke-width="2" stroke="currentColor" 
+                  class="w-5 h-5 text-[#6e523d]">
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                      d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" />
+              </svg>
+              <input 
+                type="text" 
+                name="q" 
+                placeholder="Search records..." 
+                value="<?= html_escape($q); ?>" 
+                id="searchBox"
+                class="w-full px-3 py-2 bg-transparent text-gray-700 focus:outline-none font-['EB_Garamond']"
+              >
+            </div>
+
+            <!-- Button -->
+            <button 
+              type="submit" 
+              class="bg-[#6e523d] hover:bg-[#4a3728] text-[#fdfaf5] font-bold px-5 py-2 rounded-r-full transition duration-200 font-['Special_Elite']"
+            >
+              Search
+            </button>
+          </form>
         </div>
 
         <!-- Table -->
@@ -75,13 +116,30 @@
                     </span>
                   </td>
                   <td class="py-3 px-4">
-                    <a href ="<?=site_url('users/update/'.$user['id']);?>" class="text-[#6e523d] hover:text-[#4a3728] font-bold underline underline-offset-2">Update</a> |
-                    <a href ="<?=site_url('users/delete/'.$user['id']);?>" onclick="return confirm('Are you sure you want to delete this record?');" class="text-[#8b3d3d] hover:text-red-700 font-bold underline underline-offset-2">Delete</a>
+                    <a href="<?=site_url('users/update/'.$user['id']);?>" class="text-[#6e523d] hover:text-[#4a3728] font-bold underline underline-offset-2">Update</a> |
+                    <a href="<?=site_url('users/delete/'.$user['id']);?>" onclick="return confirm('Are you sure you want to delete this record?');" class="text-[#8b3d3d] hover:text-red-700 font-bold underline underline-offset-2">Delete</a>
                   </td>
                 </tr>
               <?php endforeach; ?>
             </tbody>
           </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container mt-8 flex justify-center">
+          <div class="inline-flex items-center space-x-2">
+            <?php if (isset($page)): ?>
+              <?= str_replace(
+                  ['<a ', '<strong>', '</strong>'],
+                  [
+                      '<a class="px-4 py-2 border border-[#8b6b4f] rounded-full text-[#6e523d] hover:bg-[#f5f1e6] transition duration-200 font-['."EB_Garamond".']" ',
+                      '<span class="px-4 py-2 bg-[#6e523d] text-[#fdfaf5] rounded-full font-bold">',
+                      '</span>'
+                  ],
+                  $page
+              ); ?>
+            <?php endif; ?>
+          </div>
         </div>
       </div>
     </div>
