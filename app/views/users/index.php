@@ -20,7 +20,7 @@
         <svg class="w-8 h-8 text-[#fdfaf5]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v4a1 1 0 001 1h16a1 1 0 001-1V7M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
-        Users
+        Users Profile
       </a>
       <a href="<?=site_url('users/create')?>" class="inline-block bg-[#6e523d] hover:bg-[#4a3728] text-[#fdfaf5] font-bold px-6 py-2 rounded-md shadow-md transition duration-200 font-['Special_Elite']">
         <span class="inline-flex items-center gap-2">
