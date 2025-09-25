@@ -125,25 +125,19 @@
           </table>
         </div>
 
-        <!-- Pagination -->
-        <div class="pagination-container mt-8 flex justify-center">
-          <div class="inline-flex items-center space-x-2">
-            <?php if (isset($page)): ?>
-              <?= str_replace(
-                  ['<a ', '<strong>', '</strong>'],
-                  [
-                      '<a class="px-4 py-2 border border-[#8b6b4f] rounded-full text-[#6e523d] hover:bg-[#f5f1e6] transition duration-200 font-['."EB_Garamond".']" ',
-                      '<span class="px-4 py-2 bg-[#6e523d] text-[#fdfaf5] rounded-full font-bold">',
-                      '</span>'
-                  ],
-                  $page
-              ); ?>
-            <?php endif; ?>
-          </div>
+        
+        </div>
+      <!-- Pagination -->
+      <div class="mt-4 flex justify-center">
+        <div class="pagination flex space-x-2">
+            <?=$page ?? ''?>
         </div>
       </div>
-    </div>
-  </div>
+          </div>
+        </div>
+        </div>
+
+
 
   <!-- Vintage Animations -->
   <style>
