@@ -10,6 +10,7 @@ class StudentsController extends Controller {
     public function __construct()
     {
         parent::__construct();
+
         $this->call->database();
          $this->call->model('StudentsModel');
           $this->call->library('pagination');
@@ -18,7 +19,7 @@ class StudentsController extends Controller {
 
     public function index()
     {   
-        $this->call->model('StudentModel');   
+        $this->call->model('StudentsModel');   
         // Get current page (default 1)
         $page = 1;
         if(isset($_GET['page']) && ! empty($_GET['page'])) {
