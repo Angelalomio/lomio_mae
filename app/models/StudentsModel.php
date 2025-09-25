@@ -15,11 +15,11 @@ class StudentsModel extends Model {
         parent::__construct();
     }
 
-    public function page($q, $records_per_page = null, $page = null) {
+    public function page($q = '', $records_per_page = null, $page = null) {
         if (is_null($page)) {
-            return $this->db->table($this->table)->get_all();
+            return $this->db->table('students')->get_all();
         } else {
-            $query = $this->db->table($this->table);
+            $query = $this->db->table('students');
 
             // Build LIKE conditions for search
             $query->like('id', '%'.$q.'%')
