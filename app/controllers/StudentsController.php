@@ -10,11 +10,15 @@ class StudentsController extends Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->call->database();
          $this->call->model('StudentsModel');
+          $this->call->library('pagination');
+
     }
 
     public function index()
-    {      
+    {   
+        $this->call->model('StudentModel');   
         // Get current page (default 1)
         $page = 1;
         if(isset($_GET['page']) && ! empty($_GET['page'])) {
@@ -44,6 +48,7 @@ class StudentsController extends Controller {
         ]);
         $this->pagination->set_theme('tailwind'); // themes: bootstrap, tailwind, custom
         $this->pagination->initialize($total_rows, $records_per_page, $page, site_url('/').'?q='.$q);
+        
 
         // Send data to view
         $data['page'] = $this->pagination->paginate();
